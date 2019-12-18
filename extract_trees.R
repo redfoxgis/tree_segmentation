@@ -65,7 +65,7 @@ plot(trees, color = "treeID", colorPalette = pastel.colors(100))
 
 # Generate tree hulls and standard metrics ~29 seconds
 tic()
-hulls  = tree_hulls(trees, type = "concav", func = .stdmetrics)
+hulls  = tree_hulls(trees, type = "convex", func = .stdmetrics)
 toc()
 spplot(hulls, "zmax")
 
