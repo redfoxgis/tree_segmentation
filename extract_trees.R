@@ -49,7 +49,7 @@ chm_s = focal(chm, w = ker, fun = median)
 toc()
 
 plot(chm, col = height.colors(50)) # check the image
-writeRaster(chm_s,"/Users/aaron/Desktop/temp/ubc_temp/chm_med_filter.tif", options=c('TFW=YES'))
+writeRaster(chm_s,"/Users/aaron/Desktop/temp/ubc_temp/chm_med_filter.tif", options=c('TFW=YES')) # Sanity check
 
 # Watershed segmentation ~993 seconds
 tic()
@@ -72,11 +72,11 @@ spplot(hulls, "zmax")
 # Subset hulls to retain polygons meeting certain criteria
 sub = subset(hulls, area <500)
 
-# Write to shapefile
+# Write to shapefile (Sanity check)
 writeOGR(obj=hulls, dsn="/Users/aaron/Desktop/temp/ubc_temp", layer="hulls-subset", driver="ESRI Shapefile") # this is in geographical projection
 
-# Detect trees
+# Detect trees (Optional, just to get tree centers)
 # variable windows size
 f <- function(x) { x * 0.07 + 3}
 ttops <- tree_detection(las, lmf(f))
-writeOGR(obj=ttops, dsn="/Users/aaron/Desktop/temp/ubc_temp", layer="treetops", driver="ESRI Shapefile") 
+writeOGR(obj=ttops, dsn="/Users/aaron/Desktop/temp/ubc_temp", layer="treetops", driver="ESRI Shapefile") # Sanity check
