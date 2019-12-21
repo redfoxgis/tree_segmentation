@@ -1,19 +1,16 @@
-require(lidR)
+require(lidR) # Most of the LiDAR processing
 require(rlas) # Necessary for writelax
 require(rgdal) # Writing to shp or raster
-require(matlab) # for tic() toc() function
-require(sp)
-
-# https://stackoverflow.com/a/14958740/1446289
+require(tictoc) # for timing
+require(sp) # A few spatial operations
 
 files <- list.files(path="/Users/aaron/Desktop/temp/ubc_temp/subset", pattern="*.las", full.names=TRUE, recursive=FALSE)
 
 merged_hulls <- SpatialPolygonsDataFrame(SpatialPolygons(list()), data=data.frame())
 
-# apply function
-# Create a function to filter noise from point cloud
-# https://cran.r-project.org/web/packages/lidR/vignettes/lidR-catalog-apply-examples.html
 lasfilternoise <- function(las, sensitivity){
+  # Create a function to filter noise from point cloud
+  # https://cran.r-project.org/web/packages/lidR/vignettes/lidR-catalog-apply-examples.html
   p95 <- grid_metrics(las, ~quantile(Z, probs = 0.95), 10)
   las <- lasmergespatial(las, p95, "p95")
   las <- lasfilter(las, Z < p95*sensitivity)
@@ -22,16 +19,15 @@ lasfilternoise <- function(las, sensitivity){
 }
 
 normalize <- function(las_denoised, f){
-  # Normalize data (try reading las file in using only ground points readlas())
+  # Normalize data 
   las_dtm <- readLAS(f)
-  # For error: https://github.com/Jean-Romain/lidR/issues/184
   dtm <- grid_terrain(las_dtm, algorithm = knnidw(k = 8, p = 2))
   las_normalized <- lasnormalize(las_denoised, dtm)
   return(las_normalized)
 }
 
 chm <- function(las_normalized){
-  # Generate a normalized CHM ~198 seconds
+  # Generate a normalized canopy height model ~198 seconds
   # https://github.com/Jean-Romain/lidR/wiki/Segment-individual-trees-and-compute-metrics
   algo <- pitfree(thresholds = c(0,10,20,30,40,50), subcircle = 0.2)
   chm  <- grid_canopy(las_normalized, 0.5, algo)
@@ -44,6 +40,7 @@ chm <- function(las_normalized){
 }
 
 treeseg <- function(canopy_height_model, las_normalized){
+  # tree segmentation
   algo <- watershed(canopy_height_model, th = 4)
   las_watershed  <- lastrees(las_normalized, algo)
   
@@ -53,13 +50,17 @@ treeseg <- function(canopy_height_model, las_normalized){
 }
 
 tree_hull_polys <- function(las_trees){
+  # Generate polygon tree canopies
   hulls  <- tree_hulls(las_trees, type = "convex", func = .stdmetrics)
   hulls_sub <- subset(hulls, area <1200 & area > 3)
   return(hulls_sub)
 }
 
+counter <- 1
+
 for (f in files) {
-  print(paste("Reading ", basename(f), "..."))
+  tic(paste(basename(f), "processed"))
+  print(paste("Reading ", basename(f), " | ", counter, " of ", length(files)))
   las <- readLAS(f, filter="-drop_class 1 3 4 6 7 8 9") # read las and keep class 2 (bare earth) and 5 (trees) classes
   writelax(f) # Create a spatial index file (.lax) to speed up processing
   if (is.na(proj4string(merged_hulls))){ 
@@ -78,5 +79,9 @@ for (f in files) {
   final_tree_hulls <- tree_hull_polys(las_trees)
   print("Merging hulls...")
   merge_hulls <- rbind(final_tree_hulls, merged_hulls, makeUniqueIDs = TRUE)
+  toc()
+  counter <- counter + 1
   print("On to the next las...")
 }
+
+print("Processing complete.")
