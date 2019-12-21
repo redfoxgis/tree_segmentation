@@ -59,23 +59,24 @@ tree_hull_polys <- function(las_trees){
 }
 
 for (f in files) {
-  # print(f)
-  # print("Reading las")
-  # las <- readLAS(f, filter="-drop_class 1 3 4 6 7 8 9") # read las and keep class 2 (bare earth) and 5 (trees) classes
-  # writelax(f) # Create a spatial index file (.lax) to speed up processing
-  # 
-  # print("Filtering noise...")
-  # las_denoised <- lasfilternoise(las, sensitivity = 1.2)
-  # print("Normalizing...")
-  # las_normalized <- normalize(las_denoised, f)
-  # print("Normalizing complete.")
-  # print("Generating CHM...")
-  # canopy_height_model <- chm(las_normalized)
-  # print("Tree Segmentation...")
-  # las_trees <- treeseg(canopy_height_model, las_normalized)
-  print("Tree hulls...")
+  print(paste("Reading ", basename(f), "..."))
+  las <- readLAS(f, filter="-drop_class 1 3 4 6 7 8 9") # read las and keep class 2 (bare earth) and 5 (trees) classes
+  writelax(f) # Create a spatial index file (.lax) to speed up processing
+  if (is.na(proj4string(merged_hulls))){ 
+    proj4string(merged_hulls) <- CRS(proj4string(las))
+    }
+
+  print("Filtering noise...")
+  las_denoised <- lasfilternoise(las, sensitivity = 1.2)
+  print("Normalizing...")
+  las_normalized <- normalize(las_denoised, f)
+  print("Generating CHM...")
+  canopy_height_model <- chm(las_normalized)
+  print("Tree Segmentation...")
+  las_trees <- treeseg(canopy_height_model, las_normalized)
+  print("Generating Tree hulls...")
   final_tree_hulls <- tree_hull_polys(las_trees)
-  print("Merge hulls...")
+  print("Merging hulls...")
   merge_hulls <- rbind(final_tree_hulls, merged_hulls, makeUniqueIDs = TRUE)
   print("On to the next las...")
 }
