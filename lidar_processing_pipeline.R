@@ -4,9 +4,9 @@ require(rgdal) # Writing to shp or raster
 require(tictoc) # for timing
 require(sp) # A few spatial operations
 
+# Input and output paths
 files <- list.files(path="/Users/aaron/Desktop/temp/ubc_temp/subset", pattern="*.las", full.names=TRUE, recursive=FALSE)
-
-merged_hulls <- SpatialPolygonsDataFrame(SpatialPolygons(list()), data=data.frame())
+outws <- "/Users/aaron/Desktop/temp/ubc_trees_shp"
 
 lasfilternoise <- function(las, sensitivity){
   # Create a function to filter noise from point cloud
@@ -77,8 +77,9 @@ for (f in files) {
   las_trees <- treeseg(canopy_height_model, las_normalized)
   print("Generating Tree hulls...")
   final_tree_hulls <- tree_hull_polys(las_trees)
-  print("Merging hulls...")
-  merge_hulls <- rbind(final_tree_hulls, merged_hulls, makeUniqueIDs = TRUE)
+  print("Writing to shp...")
+  # Write to shapefile (Sanity check)
+  writeOGR(obj = final_tree_hulls, dsn = outws, layer = tools::file_path_sans_ext(basename(f)), driver = "ESRI Shapefile")
   toc()
   counter <- counter + 1
   print("On to the next las...")
