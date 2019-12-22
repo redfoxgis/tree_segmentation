@@ -5,7 +5,7 @@ require(tictoc) # for timing
 require(sp) # A few spatial operations
 
 # Input and output paths
-files <- list.files(path="/Users/aaron/Desktop/temp/ubc_temp/subset", pattern="*.las", full.names=TRUE, recursive=FALSE)
+files <- list.files(path="/Users/aaron/gdrive/projects/ubc_project/data/las_2018", pattern="*.las", full.names=TRUE, recursive=FALSE)
 outws <- "/Users/aaron/Desktop/temp/ubc_trees_shp"
 
 lasfilternoise <- function(las, sensitivity){
@@ -60,12 +60,10 @@ counter <- 1
 
 for (f in files) {
   tic(paste(basename(f), "processed"))
+  # Read in las file and write index file
   print(paste("Reading ", basename(f), " | ", counter, " of ", length(files)))
   las <- readLAS(f, filter="-drop_class 1 3 4 6 7 8 9") # read las and keep class 2 (bare earth) and 5 (trees) classes
   writelax(f) # Create a spatial index file (.lax) to speed up processing
-  if (is.na(proj4string(merged_hulls))){ 
-    proj4string(merged_hulls) <- CRS(proj4string(las))
-    }
 
   print("Filtering noise...")
   las_denoised <- lasfilternoise(las, sensitivity = 1.2)
@@ -78,7 +76,7 @@ for (f in files) {
   print("Generating Tree hulls...")
   final_tree_hulls <- tree_hull_polys(las_trees)
   print("Writing to shp...")
-  # Write to shapefile (Sanity check)
+  # Write to shapefile
   writeOGR(obj = final_tree_hulls, dsn = outws, layer = tools::file_path_sans_ext(basename(f)), driver = "ESRI Shapefile")
   toc()
   counter <- counter + 1
