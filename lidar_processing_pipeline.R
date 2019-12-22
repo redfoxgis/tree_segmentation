@@ -3,10 +3,11 @@ require(rlas) # Necessary for writelax
 require(rgdal) # Writing to shp or raster
 require(tictoc) # for timing
 require(sp) # A few spatial operations
+require(concaveman) # For concave hulls
 
 # Input and output paths
-files <- list.files(path="/Users/aaron/gdrive/projects/ubc_project/data/las_2018", pattern="*.las", full.names=TRUE, recursive=FALSE)
-outws <- "/Users/aaron/Desktop/temp/ubc_trees_shp"
+files <- list.files(path="/Users/aaron/Desktop/temp/ubc_temp/subset_concave", pattern="*.las", full.names=TRUE, recursive=FALSE)
+outws <- "/Users/aaron/Desktop/temp/ubc_trees_shp_concave"
 
 lasfilternoise <- function(las, sensitivity){
   # Create a function to filter noise from point cloud
@@ -51,7 +52,7 @@ treeseg <- function(canopy_height_model, las_normalized){
 
 tree_hull_polys <- function(las_trees){
   # Generate polygon tree canopies
-  hulls  <- tree_hulls(las_trees, type = "convex", func = .stdmetrics)
+  hulls  <- tree_hulls(las_trees, type = "concave", func = .stdmetrics)
   hulls_sub <- subset(hulls, area <1200 & area > 3)
   return(hulls_sub)
 }
