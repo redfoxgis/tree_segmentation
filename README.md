@@ -45,4 +45,20 @@ Before we even unzip the downloaded file, let's inspect all of the available met
 ### Inspecting the point cloud data
 Now we will begin inspecting the raw point cloud data using the R package `lidR`.
 
+Import packages we will use in this tutorial
 
+```R
+require(lidR)
+require(rlas) # Necessary for writelax
+require(rgdal) # Writing to shp or raster
+require(tictoc) # for tic() toc() function
+
+```
+
+Let's read in the las file
+```R
+data <- /path/to/your/pointclouddata.las`
+las <- readLAS(data, filter="-drop_class 1 3 4 6 7 8 9") # Drop all classes except 
+```
+
+and inspect the data
