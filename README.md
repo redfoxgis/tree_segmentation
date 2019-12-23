@@ -43,4 +43,6 @@ Before we even unzip the downloaded file, let's inspect all of the available met
       8. Noise (noise points, blunders, outliners, etc)
       
 ### Inspecting the point cloud data
+Now we will begin inspecting the raw point cloud data using the R package `lidR`.
+
 
