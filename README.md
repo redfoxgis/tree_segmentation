@@ -37,7 +37,7 @@ Before we even unzip the downloaded file, let's inspect all of the available met
       2. Bare-earth and low grass;
       3. Low vegetation (height <2m);
       4. High vegetation (height <2m);
-      5 Water;
-      6 Buildings;
-      7 Other; and
-      8 Noise (noise points, blunders, outliners, etc)​
+      5. Water;
+      6. Buildings;
+      7. Other; and
+      8. Noise (noise points, blunders, outliners, etc)​
