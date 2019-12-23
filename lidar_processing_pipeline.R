@@ -52,7 +52,7 @@ treeseg <- function(canopy_height_model, las_normalized){
 
 tree_hull_polys <- function(las_trees){
   # Generate polygon tree canopies
-  hulls  <- tree_hulls(las_trees, type = "concave", func = .stdmetrics)
+  hulls  <- tree_hulls(las_trees, type = "concave", concavity = 2, func = .stdmetrics)
   hulls_sub <- subset(hulls, area <1200 & area > 3)
   return(hulls_sub)
 }
@@ -81,6 +81,7 @@ for (f in files) {
   writeOGR(obj = final_tree_hulls, dsn = outws, layer = tools::file_path_sans_ext(basename(f)), driver = "ESRI Shapefile")
   toc()
   counter <- counter + 1
+  #rm(list = ls()) # Remove all of the stored objects prior to the next iteration
   print("On to the next las...")
 }
 
