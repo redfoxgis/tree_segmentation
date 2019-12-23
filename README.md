@@ -40,4 +40,7 @@ Before we even unzip the downloaded file, let's inspect all of the available met
       5. Water;
       6. Buildings;
       7. Other; and
-      8. Noise (noise points, blunders, outliners, etc)​
+      8. Noise (noise points, blunders, outliners, etc)
+      
+### Inspecting the point cloud data
+
