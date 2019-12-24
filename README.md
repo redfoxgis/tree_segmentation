@@ -62,3 +62,87 @@ las <- readLAS(data, filter="-drop_class 1 3 4 6 7 8 9") # Drop all classes exce
 ```
 
 and inspect the data
+
+`lascheck(las)`
+
+```R
+ Checking the data
+  - Checking coordinates... ✓
+  - Checking coordinates type... ✓
+  - Checking attributes type... ✓
+  - Checking ReturnNumber validity... ✓
+  - Checking NumberOfReturns validity... ✓
+  - Checking ReturnNumber vs. NumberOfReturns... ✓
+  - Checking RGB validity... ✓
+  - Checking absence of NAs... ✓
+  - Checking duplicated points...
+   ⚠ 6337 points are duplicated and share XYZ coordinates with other points
+  - Checking degenerated ground points... ✓
+  - Checking attribute population...
+   ⚠ 'ScanDirectionFlag' attribute is not populated.
+ Checking the header
+  - Checking header completeness... ✓
+  - Checking scale factor validity... ✓
+  - Checking Point Data Format ID validity... ✓
+  - Checking extra bytes attributes validity... ✓
+  - Checking coordinate reference sytem... ✓
+ Checking header vs data adequacy
+  - Checking attributes vs. point format... ✓
+  - Checking header bbox vs. actual content... ✓
+  - Checking header number of points vs. actual content... ✓
+  - Checking header return number vs. actual content... ✓
+ Checking preprocessing already done 
+  - Checking ground classification... yes
+  - Checking normalization... no
+  - Checking negative outliers...
+   ⚠ 137970 points below 0
+  - Checking flightline classification... yes
+```
+You can see that `lascheck()` provides useful quality control information about the LiDAR data.
+
+We can also get some basic information about the point cloud using 
+
+`summary(las)`
+
+```R
+class        : LAS (LASF v1.2)
+point format : 1
+memory       : 3.7 Gb 
+extent       :481000, 482000, 5456000, 5457000 (xmin, xmax, ymin, ymax)
+coord. ref.  : +proj=utm +zone=10 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs 
+area         : 1 km²
+points       : 47.36 million points
+density      : 47.37 points/m²
+names        : X Y Z gpstime Intensity ReturnNumber NumberOfReturns ScanDirectionFlag EdgeOfFlightline Classification Synthetic_flag Keypoint_flag Withheld_flag ScanAngleRank UserData PointSourceID 
+File signature:           LASF 
+File source ID:           0 
+Global encoding:
+ - GPS Time Type: Standard GPS Time 
+ - Synthetic Return Numbers: no 
+ - Well Know Text: CRS is GeoTIFF 
+ - Aggregate Model: false 
+Project ID - GUID:        00000000-0000-0000-0000-000000000000 
+Version:                  1.2
+System identifier:        LAStools (c) by rapidlasso GmbH 
+Generating software:      las2las (version 181119) 
+File creation d/y:        7/2019
+header size:              227 
+Offset to point data:     323 
+Num. var. length record:  1 
+Point data format:        1 
+Point data record length: 28 
+Num. of point records:    47360009 
+Num. of points by return: 33908912 9530523 3165826 660943 85597 
+Scale factor X Y Z:       0.01 0.01 0.01 
+Offset X Y Z:             4e+05 5e+06 0 
+min X Y Z:                481000 5456000 -397.71 
+max X Y Z:                482000 5457000 308.65 
+Variable length records: 
+   Variable length record 1 of 1 
+       Description: by LAStools of rapidlasso GmbH 
+       Tags:
+          Key 1024 value 1 
+          Key 3072 value 3157 
+          Key 3076 value 9001 
+          Key 4099 value 9001 
+```
