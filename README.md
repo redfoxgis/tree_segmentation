@@ -146,3 +146,18 @@ Variable length records:
           Key 3076 value 9001 
           Key 4099 value 9001 
 ```
+Of particular interest is the projected coordinate system and point density.
+
+Now let's inspect the classes
+`sort(unique(las@data$Classification))`
+
+`[1] 1 2 3 5 6 7 9`
+
+From this, we can see classes 4 (High vegetation) and 8 (noise) are missing from this las tile. This is unusual, so let's take a look at the the actual point cloud data
+
+
+
+
+Here we are going to filter out all of the classes except for our classes of interest
+
+las <- readLAS(data, filter="-drop_class 1 3 4 6 7 8 9")
