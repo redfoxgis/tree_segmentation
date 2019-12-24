@@ -155,7 +155,7 @@ Now let's inspect the classes
 
 From this, we can see classes 4 (High vegetation) and 8 (noise) are missing from this las tile. This is unusual, so let's take a look at the the actual point cloud data
 
-
+![Classified Point Cloud](./media/las_classes.png)
 
 
 Here we are going to filter out all of the classes except for our classes of interest
