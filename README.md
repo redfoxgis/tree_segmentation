@@ -16,7 +16,7 @@ This is the code repository for the UBC Tree Project. The purpose fo this reposi
 * concaveman  (1.0.0+)
 
 ## How to run
-The R script to process point cloud data and output tree canopy polygons is called **lidar_processing_pipeline.R
+The R script to process point cloud data and output tree canopy polygons is called **lidar_processing_pipeline.R**
 
 There should be an input directory containing a collection of 1 or many las/laz files. 
 
