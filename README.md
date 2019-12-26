@@ -15,7 +15,21 @@ This is the code repository for the UBC Tree Project. The purpose fo this reposi
 * sp          (1.3-2+)
 * concaveman  (1.0.0+)
 
-## Processing LiDAR point cloud data
+## How to run
+The R script to process point cloud data and output tree canopy polygons is called **lidar_processing_pipeline.R
+
+There should be an input directory containing a collection of 1 or many las/laz files. 
+
+e.g.
+/path/to/input_las_files
+
+There should also be a path to a directory which will contain the shapefile/s of tree canopies.
+
+e.g.
+/path/to/output_shps
+
+
+# Processing LiDAR point cloud data
 
 This tutorial builds on a `lidR` tutorial called [Segment individual trees and compute metrics](https://github.com/Jean-Romain/lidR/wiki/Segment-individual-trees-and-compute-metrics) by exploring in-depth the process of preparing the raw point cloud prior to tree segmentation. 
 
