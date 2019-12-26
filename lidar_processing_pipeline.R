@@ -81,7 +81,7 @@ for (f in files) {
   writeOGR(obj = final_tree_hulls, dsn = outws, layer = tools::file_path_sans_ext(basename(f)), driver = "ESRI Shapefile")
   toc()
   counter <- counter + 1
-  rm(list = ls()) # Remove all of the stored objects prior to the next iteration (Comment out if you want to inspect the output)
+  rm(las, las_denoised, las_normalized, canopy_height_model, las_trees, final_tree_hulls) # Remove all of the stored objects prior to the next iteration (Comment out if you want to inspect the output)
   print("On to the next las...")
 }
 
