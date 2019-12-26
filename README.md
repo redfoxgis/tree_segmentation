@@ -22,13 +22,14 @@ There should be an input directory containing a collection of 1 or many las/laz 
 
 e.g.
 
-`/path/to/input_las_files`
+`files <- list.files(path="/path/to/input_las_files", pattern="*.las", full.names=TRUE, recursive=FALSE)
+`
 
 There should also be a path to a directory which will contain the shapefile/s of tree canopies.
 
 e.g.
 
-`/path/to/output_shps`
+`outws <- "/path/to/output_shps"`
 
 
 # Processing LiDAR point cloud data
