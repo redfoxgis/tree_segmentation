@@ -21,12 +21,14 @@ The R script to process point cloud data and output tree canopy polygons is call
 There should be an input directory containing a collection of 1 or many las/laz files. 
 
 e.g.
-/path/to/input_las_files
+
+`/path/to/input_las_files`
 
 There should also be a path to a directory which will contain the shapefile/s of tree canopies.
 
 e.g.
-/path/to/output_shps
+
+`/path/to/output_shps`
 
 
 # Processing LiDAR point cloud data
