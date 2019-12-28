@@ -173,10 +173,12 @@ sort(unique(las@data$Classification))
 
 From this, we can see which classes are missing from this las tile. An inspection of the City of Vancouver LiDAR classification and the ASPRS classification specifications shows that the classes are not aligned:
 
-The City classes:
+#### The City classes:
+
 ![City Classes](./media/ubc_classes.png)
 
-The ASPRS class specifications
+#### The ASPRS class specifications
+
 ![ASPRS Classes](./media/asprs_classes.png)
 
 This is unusual, so let's take a look at the the classified point cloud data to see what is going on.
