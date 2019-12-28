@@ -197,8 +197,9 @@ plot(las_class)
 ```
 ![Class 5 Trees](./media/class5_trees.png)
 
-After inspecting all of the classes, it appears as if the LiDAR tiles are in fact classified to ASPRS classification standards. However, when observing class 5 (High Vegetation), it became apparent that there were several outliers we will need to remove.
+After inspecting all of the classes, it appears as if the LiDAR tiles are in fact classified to ASPRS classification standards. However, when observing class 5 (High Vegetation), it became apparent that there were several outliers in we will need to remove.
 
+![Outliers](./media/outliers.png)
 
 
 
