@@ -183,9 +183,19 @@ From this, we can see which classes are missing from this las tile. An inspectio
 
 This is unusual, so let's take a look at the the classified point cloud data to see what is going on.
 
+```r
+plot(las, color = "Classification")
+```
+
 ![Classified Point Cloud](./media/las_classes.png)
 
 We can select individual classes to inspect them closer
+
+```r
+las_class <- lasfilter(las, Classification == 5)
+plot(las_class)
+```
+
 
 
 
