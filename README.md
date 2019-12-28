@@ -3,7 +3,7 @@ This is the code repository for the UBC Tree Project. The purpose fo this reposi
 
 - To document detailed steps in processing LiDAR.
 - To visualize results.
-- To provide code to segment and create tree hulls.
+- To provide code to segment and create individual tree hulls.
 
 ![Image of lastrees output](./media/trees.png)
 
@@ -171,9 +171,20 @@ sort(unique(las@data$Classification))
 
 `[1] 1 2 3 5 6 7 9`
 
-From this, we can see classes 4 (High vegetation) and 8 (noise) are missing from this las tile. This is unusual, so let's take a look at the the classified point cloud data
+From this, we can see which classes are missing from this las tile. An inspection of the City of Vancouver LiDAR classification and the ASPRS classification specifications shows that the classes are not aligned:
+
+The City classes:
+![City Classes](./media/ubc_classes.png)
+
+The ASPRS class specifications
+![ASPRS Classes](./media/asprs_classes.png)
+
+This is unusual, so let's take a look at the the classified point cloud data to see what is going on.
 
 ![Classified Point Cloud](./media/las_classes.png)
+
+We can select individual classes to inspect them closer
+
 
 
 Here we are going to filter out all of the classes except for our classes of interest
