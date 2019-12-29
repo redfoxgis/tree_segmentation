@@ -46,7 +46,7 @@ Before we even unzip the downloaded file, let's inspect all of the available met
 
 - The projected coordinate system is NAD 83 UTM Zone 13N
 - Points density is 30 pts / m^2
-- Data was acquired from August 27th and August 28th, 2018
+- Data was acquired from August 27th and August 28th, 2018 (i.e. leaf-on conditions)
 - Points were classified as follows
 
       1. Unclassified;
