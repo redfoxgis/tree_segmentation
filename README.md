@@ -212,7 +212,7 @@ Then, normalize the data so that ground points are centered on 0.
 dtm <- grid_terrain(las, algorithm = knnidw(k = 8, p = 2))
 las_normalized <- lasnormalize(las, dtm)
 ```
-There is an excellent example of using a filter to remove points above the 95th percentile of height in the [`lidR` documentation.](https://cran.r-project.org/web/packages/lidR/vignettes/lidR-catalog-apply-examples.html). This is how we impliment the filter:
+There is an excellent example of using a filter to remove points above the 95th percentile of height in the [`lidR` documentation.](https://cran.r-project.org/web/packages/lidR/vignettes/lidR-catalog-apply-examples.html). This is how we implement the filter:
 
 ```R
 # Create a filter to remove points above 95th percentile of height
