@@ -197,10 +197,11 @@ plot(las_class)
 ```
 ![Class 5 Trees](./media/class5_trees.png)
 
-After inspecting all of the classes, it appears as if the LiDAR tiles are in fact classified to ASPRS classification standards. However, when observing class 5 (High Vegetation), it became apparent that there were several outliers in we will need to remove.
+After inspecting all of the classes, it appears as if the LiDAR tiles are in fact classified to ASPRS classification standards. However, when observing class 5 (High Vegetation), it became apparent that there were several outliers we will need to remove.
 
 ![Outliers](./media/outliers.png)
 
+There is an excellent example of using a filter to remove points above the 95th percentile of height in the [`lidR` documentation.](https://cran.r-project.org/web/packages/lidR/vignettes/lidR-catalog-apply-examples.html). 
 
 
 Here we are going to filter out all of the classes except for our classes of interest
