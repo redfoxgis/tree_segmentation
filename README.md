@@ -1,5 +1,5 @@
 # Tree Segmentation
-This is the code repository for the UBC Tree Project. The purpose fo this repository:
+This is the code repository for the UBC Tree Project. The purpose for this repository:
 
 - To document detailed steps in processing LiDAR.
 - To visualize results.
