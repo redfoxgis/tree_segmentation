@@ -201,11 +201,37 @@ After inspecting all of the classes, it appears as if the LiDAR tiles are in fac
 
 ![Outliers](./media/outliers.png)
 
-There is an excellent example of using a filter to remove points above the 95th percentile of height in the [`lidR` documentation.](https://cran.r-project.org/web/packages/lidR/vignettes/lidR-catalog-apply-examples.html). 
-
-
 Here we are going to filter out all of the classes except for our classes of interest
 
 ```R
 las <- readLAS(data, filter="-drop_class 1 3 4 6 7 8 9")`
 ```
+Then, normalize the data so that ground points are centered on 0.
+
+```R
+dtm <- grid_terrain(las, algorithm = knnidw(k = 8, p = 2))
+las_normalized <- lasnormalize(las, dtm)
+```
+There is an excellent example of using a filter to remove points above the 95th percentile of height in the [`lidR` documentation.](https://cran.r-project.org/web/packages/lidR/vignettes/lidR-catalog-apply-examples.html). This is how we impliment the filter:
+
+```R
+# Create a filter to remove points above 95th percentile of height
+lasfilternoise = function(las, sensitivity)
+{
+  p95 <- grid_metrics(las, ~quantile(Z, probs = 0.95), 10)
+  las <- lasmergespatial(las, p95, "p95")
+  las <- lasfilter(las, Z < p95*sensitivity)
+  las$p95 <- NULL
+  return(las)
+}
+
+las_denoised <- lasfilternoise(las_normalized, sensitivity = 1.2)
+```
+
+You can see the filter does a good job removing most outliers
+
+#### Before filtering
+![Noisy Las](./media/las_noisy.png)
+
+#### After filtering
+![Denoised Las](./media/las_denoised.png)
