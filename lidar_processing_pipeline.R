@@ -63,7 +63,7 @@ for (f in files) {
   tic(paste(basename(f), "processed"))
   # Read in las file and write index file
   print(paste("Reading ", basename(f), " | ", counter, " of ", length(files)))
-  las <- readLAS(f, filter="-drop_class 1 3 4 6 7 8 9") # read las and keep class 2 (bare earth) and 5 (trees) classes
+  las <- readLAS(f, filter="-keep_class 2 5") # read las and keep class 2 (bare earth) and 5 (trees) classes
   writelax(f) # Create a spatial index file (.lax) to speed up processing
 
   print("Filtering noise...")
