@@ -201,6 +201,7 @@ After inspecting all of the classes, it appears as if the LiDAR tiles are in fac
 
 ![Outliers](./media/outliers.png)
 
+### Filtering point cloud data
 Here we are going to filter out all of the classes except for our classes of interest
 
 ```R
@@ -235,3 +236,6 @@ You can see the filter does a good job removing most outliers
 
 #### After filtering
 ![Denoised Las](./media/las_denoised.png)
+
+### Generating a canopy height model
+Now that we have classes isolated and outliers filtered we can generate a canopy height model (CHM), which will be the basis for segmenting and classifying our trees. It is important to note that we are primarily interested in  
