@@ -238,4 +238,18 @@ You can see the filter does a good job removing most outliers
 ![Denoised Las](./media/las_denoised.png)
 
 ### Generating a canopy height model
-Now that we have classes isolated and outliers filtered we can generate a canopy height model (CHM), which will be the basis for segmenting and classifying our trees. It is important to note that we are primarily interested in  
+Now that we have classes isolated and outliers filtered we can generate a canopy height model (CHM), which will be the basis for segmenting and classifying our trees. It is important to note that we are primarily interested in surface characteristics of the tree canopy. Therefore, it is not necessary to ensure that the points are uniformly distributed as would be the case in analyses where vertical point distribution is important such as grid metrics.
+
+There have been several good tutorials on generating perfect canopy height models, incuding [this](https://github.com/Jean-Romain/lidR/wiki/Rasterizing-perfect-canopy-height-models) from the authors of lidR and [this](https://rapidlasso.com/2014/11/04/rasterizing-perfect-canopy-height-models-from-lidar/) from Martin Isenburg.
+
+We are going to use a pitfree CHM generated in `lidR`.
+
+```R
+chm <- grid_canopy(las_denoised, 0.5, pitfree(c(0,2,5,10,15), c(3,1.5), subcircle = 0.2))
+```
+
+`lidR` provides a nice way to visualize raster elevation data in 3D.
+```R
+plot_dtm3d(chm)
+```
+![3D CHM](./media/chm_3d.png)
