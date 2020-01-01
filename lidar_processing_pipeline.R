@@ -54,7 +54,7 @@ tree_hull_polys <- function(las_trees){
   # Generate polygon tree canopies
   hulls  <- tree_hulls(las_trees, type = "concave", concavity = 2, func = .stdmetrics)
   #hulls_sub <- subset(hulls, area <1200 & area > 3) # Not needed with new pitfree algorithm in CHM
-  return(hulls_sub)
+  return(hulls)
 }
 
 counter <- 1
