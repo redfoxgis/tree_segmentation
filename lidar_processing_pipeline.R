@@ -30,7 +30,7 @@ normalize <- function(las_denoised, f){
 chm <- function(las_normalized){
   # Generate a normalized canopy height model ~198 seconds
   # https://github.com/Jean-Romain/lidR/wiki/Segment-individual-trees-and-compute-metrics
-  algo <- pitfree(thresholds = c(0,10,20,30,40,50), subcircle = 0.2)
+  algo <- pitfree(c(0,2,5,10,15), c(3,1.5), subcircle = 0.2)
   chm  <- grid_canopy(las_normalized, 0.5, algo)
   
   # Smooth the CHM with double pass median filter
@@ -53,7 +53,7 @@ treeseg <- function(canopy_height_model, las_normalized){
 tree_hull_polys <- function(las_trees){
   # Generate polygon tree canopies
   hulls  <- tree_hulls(las_trees, type = "concave", concavity = 2, func = .stdmetrics)
-  hulls_sub <- subset(hulls, area <1200 & area > 3)
+  #hulls_sub <- subset(hulls, area <1200 & area > 3) # Not needed with new pitfree algorithm in CHM
   return(hulls_sub)
 }
 
