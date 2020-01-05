@@ -81,7 +81,9 @@ las <- readLAS(data) # Read in all of the data
 
 and inspect the data
 
-`lascheck(las)`
+```R
+lascheck(las)
+```
 
 ```R
  Checking the data
