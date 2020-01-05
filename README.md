@@ -21,15 +21,17 @@ The R script to process point cloud data and output tree canopy polygons is call
 There should be an input directory containing a collection of 1 or many las/laz files. 
 
 e.g.
-
-`files <- list.files(path="/path/to/input_las_files", pattern="*.las", full.names=TRUE, recursive=FALSE)
-`
+```R
+files <- list.files(path="/path/to/input_las_files", pattern="*.las", full.names=TRUE, recursive=FALSE)
+```
 
 There should also be a path to a directory which will contain the shapefile/s of tree canopies.
 
 e.g.
 
-`outws <- "/path/to/output_shps"`
+```R
+outws <- "/path/to/output_shps"`
+```
 
 # Processing LiDAR point cloud data
 
@@ -118,7 +120,9 @@ You can see that `lascheck()` provides useful quality control information about 
 
 We can also get some basic information about the point cloud using 
 
-`summary(las)`
+```R
+summary(las)
+```
 
 ```R
 class        : LAS (LASF v1.2)
