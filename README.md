@@ -76,7 +76,7 @@ require(tictoc) # for tic() toc() function
 Let's read in the las file
 ```R
 data <- /path/to/your/pointclouddata.las`
-las <- readLAS(data, filter="-drop_class 1 3 4 6 7 8 9") # Drop all classes except 
+las <- readLAS(data) # Read in all of the data
 ```
 
 and inspect the data
