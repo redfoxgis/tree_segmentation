@@ -259,3 +259,4 @@ chm <- grid_canopy(las_denoised, 0.5, pitfree(c(0,2,5,10,15), c(3,1.5), subcircl
 plot_dtm3d(chm)
 ```
 
+![3D CHM](./media/chm-gif.gif)
