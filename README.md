@@ -282,3 +282,4 @@ trees <- lasfilter(las_watershed, !is.na(treeID))
 # View the results
 plot(trees, color = "treeID", colorPalette = pastel.colors(100))
 ```
+![las trees](./media/las-trees-gif.gif)
