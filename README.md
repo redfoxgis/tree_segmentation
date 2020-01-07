@@ -260,3 +260,11 @@ plot_dtm3d(chm)
 ```
 
 ![3D CHM](./media/chm-gif.gif)
+
+Our objective is to generate individual tree hulls (polygons) representing the tree canopies. Often times it is helpful to apply a 3x3 or 5x5 median filter to help smooth the canopy prior to tree detection. Applying a median filter helps define the boundary of the tree canopy and can lead to better results when delineating individual trees.
+
+Here a single 5x5 moving window is used to apply a median filter: 
+```R
+ker <- matrix(1,5,5)
+chm_s <- focal(chm, w = ker, fun = median)
+```
