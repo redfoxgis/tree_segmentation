@@ -211,7 +211,7 @@ After inspecting all of the classes, it appears as if the LiDAR tiles are in fac
 Here we are going to filter out all of the classes except for our classes of interest
 
 ```R
-las <- readLAS(data, filter="-drop_class 1 3 4 6 7 8 9")`
+las <- readLAS(data, filter="-keep_class 2 5") # Keep high vegetation and ground point classes`
 ```
 Then, normalize the data so that ground points are centered on 0.
 
