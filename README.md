@@ -283,3 +283,5 @@ trees <- lasfilter(las_watershed, !is.na(treeID))
 plot(trees, color = "treeID", colorPalette = pastel.colors(100))
 ```
 ![las trees](./media/las-trees-gif.gif)
+
+Great! An initial inspection of the tree segmentation shows positive results.
