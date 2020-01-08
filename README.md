@@ -284,4 +284,9 @@ plot(trees, color = "treeID", colorPalette = pastel.colors(100))
 ```
 ![las trees](./media/las-trees-gif.gif)
 
-Great! An initial inspection of the tree segmentation shows positive results.
+Great! An initial inspection of the tree segmentation shows positive results--time to delineate tree canopies.
+
+```R
+hulls  <- tree_hulls(trees, type = "concave", concavity = 2, func = .stdmetrics)
+```
+
