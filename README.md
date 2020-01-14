@@ -38,12 +38,12 @@ outws <- "/path/to/output_shps"`
 This tutorial builds on a `lidR` tutorial called [Segment individual trees and compute metrics](https://github.com/Jean-Romain/lidR/wiki/Segment-individual-trees-and-compute-metrics) by exploring in-depth the process of preparing the raw point cloud prior to tree segmentation. 
 
 ## Overview
-Downloading data
-Inspecting the point cloud data
-Filtering point cloud data
-Generating a canopy height model
-Individual tree detection
-In Sum
+* Downloading data
+* Inspecting the point cloud data
+* Filtering point cloud data
+* Generating a canopy height model
+* Individual tree detection
+* Summary
 
 ### Downloading data
 Let's start a las tile from the UBC campus with a nice mixture of buildings and trees. The City of Vancouver has a really nice web interface:
@@ -308,7 +308,7 @@ For example, the following map shows the maximum height (zmax) within each tree 
 
 ![tree hulls zmax](./media/trees-zmax.png)
 
-### In Sum
+### Summary
 
 Every LiDAR based project will be different--point cloud data may range from a csv file of xyz coords to fully preprocessed and classified las data. However, the fundamentals of how we approach the project remain constant. Before any analysis is conducted it is necessary to thoroughly identify abnormalities and errors in the LiDAR dataset and how these will effect the analysis. For example, 
 
