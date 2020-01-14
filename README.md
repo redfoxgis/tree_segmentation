@@ -37,6 +37,14 @@ outws <- "/path/to/output_shps"`
 
 This tutorial builds on a `lidR` tutorial called [Segment individual trees and compute metrics](https://github.com/Jean-Romain/lidR/wiki/Segment-individual-trees-and-compute-metrics) by exploring in-depth the process of preparing the raw point cloud prior to tree segmentation. 
 
+## Overview
+Downloading data
+Inspecting the point cloud data
+Filtering point cloud data
+Generating a canopy height model
+Individual tree detection
+In Sum
+
 ### Downloading data
 Let's start a las tile from the UBC campus with a nice mixture of buildings and trees. The City of Vancouver has a really nice web interface:
 
@@ -294,8 +302,12 @@ The individual tree canopy polygons (hulls) appear to look great.
 
 ![tree hulls](./media/tree-hulls.png)
 
-An added bonus is that we also summarized point cloud metrics within each polygon when we included `func = .stdmetrics` in the `tree_hulls` function. This allows us to do many thing such as quickly apply statistical filters, classify trees using machine learning approaches, and visualize individual tree attributes. For example, the following screenshot shows the maximum height (zmax) within each tree hull.
+An added bonus is that we also summarized point cloud metrics within each polygon when we included `func = .stdmetrics` in the `tree_hulls` function. This allows us to do many thing such as quickly apply statistical filters, classify trees using machine learning approaches, and visualize individual tree attributes. 
+
+For example, the following map shows the maximum height (zmax) within each tree hull.
 
 ![tree hulls zmax](./media/trees-zmax.png)
 
 ### In Sum
+
+Every LiDAR based project will be different--point cloud data may range from a csv file of xyz coords to fully preprocessed and classified. However, the fundamentals of how we approach the project remain constant. 
