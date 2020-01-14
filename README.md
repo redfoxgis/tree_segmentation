@@ -289,4 +289,7 @@ Great! An initial inspection of the tree segmentation shows positive results--ti
 ```R
 hulls  <- tree_hulls(trees, type = "concave", concavity = 2, func = .stdmetrics)
 ```
+
+The individual tree canopy polygons (hulls) appear to look great. An added bonus is that we also summarized point cloud metrics within each polygon when we included `func = .stdmetrics` in the `tree_hulls` function. This allows us to do many thing such as quickly apply statistical filters, classify trees to species using machine learning approaches, and visualize individual tree attributes. For example, the following screenshot  
+
 ![tree hulls](./media/tree-hulls.png)
