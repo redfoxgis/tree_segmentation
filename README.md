@@ -296,6 +296,6 @@ The individual tree canopy polygons (hulls) appear to look great.
 
 An added bonus is that we also summarized point cloud metrics within each polygon when we included `func = .stdmetrics` in the `tree_hulls` function. This allows us to do many thing such as quickly apply statistical filters, classify trees using machine learning approaches, and visualize individual tree attributes. For example, the following screenshot shows the maximum height (zmax) within each tree hull.
 
-![tree hulls zmax](./media/hulls-zmax.png)
+![tree hulls zmax](./media/trees-zmax.png)
 
 ### In Sum
