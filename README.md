@@ -289,4 +289,4 @@ Great! An initial inspection of the tree segmentation shows positive results--ti
 ```R
 hulls  <- tree_hulls(trees, type = "concave", concavity = 2, func = .stdmetrics)
 ```
-![tree-hulls](./media/tree-hulls.gif)
+![tree hulls](./media/tree-hulls.png)
