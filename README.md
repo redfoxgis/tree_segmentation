@@ -35,7 +35,7 @@ outws <- "/path/to/output_shps"`
 
 # Processing LiDAR point cloud data
 
-This tutorial builds on a `lidR` tutorial called [Segment individual trees and compute metrics](https://github.com/Jean-Romain/lidR/wiki/Segment-individual-trees-and-compute-metrics) by exploring in-depth the process of preparing the raw point cloud prior to tree segmentation. 
+This tutorial builds on the `lidR` tutorial [Segment individual trees and compute metrics](https://github.com/Jean-Romain/lidR/wiki/Segment-individual-trees-and-compute-metrics) by exploring in-depth the process of preparing the raw point cloud prior to tree segmentation. 
 
 ## Overview
 * Downloading data
