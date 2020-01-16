@@ -30,7 +30,7 @@ There should also be a path to a directory which will contain the shapefile/s of
 e.g.
 
 ```R
-outws <- "/path/to/output_shps"`
+outws <- "/path/to/output_shps"
 ```
 
 # Processing LiDAR point cloud data
