@@ -35,7 +35,7 @@ outws <- "/path/to/output_shps"`
 
 # Processing LiDAR point cloud data
 
-This tutorial builds on the `lidR` tutorial [Segment individual trees and compute metrics](https://github.com/Jean-Romain/lidR/wiki/Segment-individual-trees-and-compute-metrics) by exploring in-depth the process of preparing the raw point cloud prior to tree segmentation. 
+This tutorial builds on the `lidR` tutorial [Segment individual trees and compute metrics](https://github.com/Jean-Romain/lidR/wiki/Segment-individual-trees-and-compute-metrics) by exploring in-depth the process of preparing the raw point cloud and tree segmentation. 
 
 ## Overview
 * Downloading data
@@ -46,7 +46,7 @@ This tutorial builds on the `lidR` tutorial [Segment individual trees and comput
 * Summary
 
 ### Downloading data
-Let's start a las tile from the UBC campus with a nice mixture of buildings and trees. The City of Vancouver has a really nice web interface:
+Let's start a las tile from the City of Vancouver with a nice mixture of buildings and trees. The City of Vancouver has a really nice web interface:
 
 ![City of Vancouver LiDAR Web Server](./media/lidar_server.png)
 
