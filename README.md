@@ -321,3 +321,4 @@ Every LiDAR based project will be different--point cloud data may range from a c
 * Will Outliers need to be filtered?
 * Is the point cloud normalized?
 
+Tree segmentation and delineation accuracy will vary based on forest cover type. Generally speaking tree segmentation in open conifer forests will yield higher accuracy than mixed, closed canopy forest types. [Hastings et al. (2020)](https://www.mdpi.com/619942) provides a useful accuracy assessment of individual tree crown delineation (ITCD) algorithms in temporate forests.
