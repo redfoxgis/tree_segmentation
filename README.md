@@ -313,12 +313,12 @@ For example, the following map shows the maximum height (zmax) within each tree 
 Every LiDAR based project will be different--point cloud data may range from a csv file of xyz coords to fully preprocessed and classified las data. However, the fundamentals of how we approach the project remain constant. Before any analysis is conducted it is necessary to thoroughly identify abnormalities and errors in the LiDAR dataset and how these will effect the analysis. For example, 
 
 * Is there any metadata?
-* What, is any, coordinate system is used?  
+* What, if any, coordinate system is used?  
 * What is the point density?
 * Have the points been classified and, if so, is the classification accurate and usable?
 * Will the flight line overlap impact my analysis?
 * Do the points need to be thinned, regularized, or filtered for analyses such as calculating grid metrics?
-* Will Outliers need to be filtered?
+* Will outliers need to be filtered?
 * Is the point cloud normalized?
 
 Tree segmentation and delineation accuracy will vary based on forest cover type. Generally speaking tree segmentation in open conifer forests will yield higher accuracy than mixed, closed canopy forest types. [Hastings et al. (2020)](https://www.mdpi.com/619942) provides a useful accuracy assessment of individual tree crown delineation (ITCD) algorithms in temporate forests.
