@@ -206,7 +206,7 @@ plot(las, color = "Classification")
 We can select individual classes to inspect them closer
 
 ```r
-las_class <- lasfilter(las, Classification == 5)
+las_class <- filter_poi(las, Classification == 5)
 plot(las_class)
 ```
 ![Class 5 Trees](./media/class5_trees.png)
