@@ -8,7 +8,7 @@ This is the code repository for the Tree Segmentation Project. The purpose for t
 ![Image of lastrees output](./media/trees.png)
 
 ## Dependencies
-* lidR        (2.14+)
+* lidR        (4.1+)
 * rlas        (1.3.4+)
 * rgdal       (1.4-8+)
 * tictoc      (1.0+)
@@ -61,8 +61,8 @@ Before we even unzip the downloaded file, let's inspect all of the available met
 
       1. Unclassified;
       2. Bare-earth and low grass;
-      3. Low vegetation (height <2m);
-      4. High vegetation (height <2m);
+      3. Low vegetation (height < 2m);
+      4. High vegetation (height > 2m);
       5. Water;
       6. Buildings;
       7. Other; and
@@ -224,23 +224,23 @@ las <- readLAS(data, filter="-keep_class 2 5") # Keep high vegetation and ground
 Then, normalize the data so that ground points are centered on 0.
 
 ```R
-dtm <- grid_terrain(las, algorithm = knnidw(k = 8, p = 2))
-las_normalized <- lasnormalize(las, dtm)
+dtm <- rasterize_terrain(las, algorithm = knnidw(k = 8L, p = 2))
+las_normalized <- normalize_height(las, dtm)
 ```
 There is an excellent example of using a filter to remove points above the 95th percentile of height in the [`lidR` documentation.](https://cran.r-project.org/web/packages/lidR/vignettes/lidR-catalog-apply-examples.html). This is how we implement the filter:
 
 ```R
 # Create a filter to remove points above 95th percentile of height
-lasfilternoise = function(las, sensitivity)
+filter_noise = function(las, sensitivity)
 {
-  p95 <- grid_metrics(las, ~quantile(Z, probs = 0.95), 10)
-  las <- lasmergespatial(las, p95, "p95")
-  las <- lasfilter(las, Z < p95*sensitivity)
+  p95 <- pixel_metrics(las, ~quantile(Z, probs = 0.95), 10)
+  las <- merge_spatial(las, p95, "p95")
+  las <- filter_poi(las, Z < p95*sensitivity)
   las$p95 <- NULL
   return(las)
 }
 
-las_denoised <- lasfilternoise(las_normalized, sensitivity = 1.2)
+las_denoised <- filter_noise(las_normalized, sensitivity = 1.2)
 ```
 
 You can see the filter does a good job removing most outliers
@@ -259,7 +259,7 @@ There have been several good tutorials on generating perfect canopy height model
 We are going to use a pitfree CHM generated in `lidR`.
 
 ```R
-chm <- grid_canopy(las_denoised, 0.5, pitfree(c(0,2,5,10,15), c(3,1.5), subcircle = 0.2))
+chm <- rasterize_canopy(las_denoised, 0.5, pitfree(c(0,2,5,10,15), c(3,1.5), subcircle = 0.2))
 ```
 
 `lidR` provides a nice way to visualize raster elevation data in 3D.
@@ -282,10 +282,10 @@ We are going to use a watershed algorithm for the tree detection with a height t
 
 ```R
 algo <- watershed(chm_s, th = 4)
-las_watershed  <- lastrees(las_denoised, algo)
+las_watershed  <- segment_trees(las_denoised, algo)
 
 # remove points that are not assigned to a tree
-trees <- lasfilter(las_watershed, !is.na(treeID))
+trees <- filter_poi(las_watershed, !is.na(treeID))
 
 # View the results
 plot(trees, color = "treeID", colorPalette = pastel.colors(100))
@@ -295,7 +295,7 @@ plot(trees, color = "treeID", colorPalette = pastel.colors(100))
 Great! An initial inspection of the tree segmentation shows positive results--time to delineate tree canopies.
 
 ```R
-hulls  <- tree_hulls(trees, type = "concave", concavity = 2, func = .stdmetrics)
+hulls  <- delineate_crowns(trees, type = "concave", concavity = 2, func = .stdmetrics)
 ```
 
 The individual tree canopy polygons (hulls) appear to look great. 
